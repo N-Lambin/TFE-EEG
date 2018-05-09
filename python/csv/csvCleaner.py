@@ -4,7 +4,6 @@ import os
 fileDir = os.getcwd()+'\\csv\\'
 fileName = "clap2"
 
-
 #create directory
 newDir = fileDir + fileName + 'DataCQ'
 if not os.path.exists(newDir):
