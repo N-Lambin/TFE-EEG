@@ -1,7 +1,7 @@
 import csv
 import os
 
-fileDir = os.getcwd()+'\\csv\\'
+fileDir = os.getcwd()+'\\python\\csv\\'
 fileName = "clap2"
 
 #create directory
