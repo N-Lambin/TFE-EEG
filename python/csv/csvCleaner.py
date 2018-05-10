@@ -2,32 +2,32 @@ import csv
 import os
 
 fileDir = os.getcwd()+'\\python\\csv\\'
-fileName = "clap2"
+fileName = "clap"
 
 #create directory
-newDir = fileDir + fileName + 'DataCQ'
+newDir = fileDir + fileName + 'Data'
 if not os.path.exists(newDir):
     os.makedirs(newDir)
 
-    #get information of the file such as date, subject, etc and create csv file
+    #get information of the file such as date, subject, etc and create other csv files
     with open(fileDir + fileName + '.csv', 'r') as csvfile:
         spamreader = csv.reader(csvfile, delimiter = ',')
 
         for row in spamreader:
-            info = open(newDir + '/info.txt', 'w+')
-            info.write('\r'.join(row))
-            info.close()
+            with open(newDir + '/info.txt', 'w+') as info:
+                info.write('\r'.join(row))
 
             channel = row[5]
             begin = channel.find('AF3')
             end = channel.find('AF4')
-
             channel = channel[begin: end+3]
+            channelList = channel.split(' ')
 
-            chanList = channel.split(' ')
-            for chan in chanList:
-                chan = open(newDir + '/' + chan + '.csv', 'w+')
-                chan.close()
+            for chan in channelList:
+                with open(newDir + '/channelList.txt', 'a+') as channelFileList:
+                    channelFileList.write(chan+'\n')
+                channelFile = open(newDir + '/' + chan + '.csv', 'w+')
+                channelFile.close()
 
             break
 
