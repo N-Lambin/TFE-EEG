@@ -3,7 +3,7 @@ import numpy as np
 import csv
 import os
 
-fileDir = os.getcwd()+'\\csv\\clap2Data\\'
+fileDir = os.getcwd()+'\\python\\csv\\clap2Data\\'
 fileName = "AF3"
 frequency = 128
 xAxis = []
