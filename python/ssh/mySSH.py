@@ -2,12 +2,12 @@ import paramiko
 import sys
 
 #example of parameters
-""" nbytes = 4096
 hostname = 'ev3dev'
 port = 1515
 username = 'robot' 
 password = 'maker'
-command = 'ls' """
+nbytes = 4096
+command = 'ls'
 
 def connectionSSH(hostname, port, username, password):
     client = paramiko.Transport((hostname, port))
