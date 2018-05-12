@@ -11,3 +11,6 @@ echo reset > $MC2/command
 echo 1000 > $MC2/speed_sp
 echo 1000 > $MC2/time_sp
 echo run-timed > $MC2/command
+
+
+fr
