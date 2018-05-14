@@ -13,4 +13,4 @@ echo 1000 > $MC2/time_sp
 echo run-timed > $MC2/command
 
 
-fr
+
