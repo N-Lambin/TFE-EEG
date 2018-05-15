@@ -31,9 +31,9 @@ def commandSSH(client, command):
             if session.exit_status_ready():
                 break
 
-        print 'exit status: ', session.recv_exit_status()
-        print ''.join(stdout_data)
-        print ''.join(stderr_data) 
+        print ('exit status: '.join(session.recv_exit_status()))
+        print (''.join(stdout_data))
+        print (''.join(stderr_data))
 
     finally:
         session.close()
