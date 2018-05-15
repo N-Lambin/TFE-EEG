@@ -2,21 +2,22 @@ import matplotlib.pyplot as plt
 import numpy as np
 import csv
 import os
+from scipy import signal
 
-fileDir = os.getcwd()+'\\python\\csv\\clapData\\'
+fileDir = os.getcwd()+'\\python\\csv\\neutral-1Data\\'
 fileName = "AF3"
-frequency = 128
+fs = 128
 xAxis = []
-yAxis = []
-nbr = 1
 
 with open(fileDir + fileName + '.csv', 'r+') as csvfile:
-    plots = csv.reader(csvfile, delimiter='\r')
+    csv_reader = csv.reader(csvfile, delimiter='\r')
     
-    for row in plots:
+    for row in csv_reader:
         xAxis.append(int(row[0]))
-        """ yAxis.append(nbr/frequency)
-        nbr += 1 """
-
-    plt.plot(xAxis, label='data from my head !!!')
-    plt.show()
+    
+    x = np.array(xAxis)
+    f, Pxx_den = signal.periodogram(x, fs, nfft=512)
+    """ plt.semilogy(f, Pxx_den)
+    plt.show() """
+    print(f)
+    print(Pxx_den)

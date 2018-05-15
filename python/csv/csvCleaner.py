@@ -2,7 +2,7 @@ import csv
 import os
 
 fileDir = os.getcwd()+'\\python\\csv\\'
-fileName = "clap"
+fileName = "wink-left-1"
 
 #create directory
 newDir = fileDir + fileName + 'Data'
