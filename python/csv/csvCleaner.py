@@ -35,9 +35,9 @@ if not os.path.exists(newDir):
 
         #get information from channels and put it in a different csv file for each channel
         for row in spamreader:
-            if nbrOfRow > 5000:
+            if nbrOfRow > 5120:
                 for i in range(0, len(channelList)):
                     chan = open(newDir + '/' + channelList[i] + '.csv', 'a')
-                    chan.write(str(int(row[i+2].split('.')[0]))+'\n')
+                    chan.write('\n'.join(str(int(row[i+2].split('.')[0]))))
                     chan.close()
             nbrOfRow += 1
