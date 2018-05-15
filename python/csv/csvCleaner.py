@@ -38,6 +38,6 @@ if not os.path.exists(newDir):
             if nbrOfRow > 5120:
                 for i in range(0, len(channelList)):
                     chan = open(newDir + '/' + channelList[i] + '.csv', 'a')
-                    chan.write('\n'.join(str(int(row[i+2].split('.')[0]))))
+                    chan.write(str(int(row[i+2].split('.')[0]))+'\n')
                     chan.close()
             nbrOfRow += 1

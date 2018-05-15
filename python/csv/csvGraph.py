@@ -15,8 +15,8 @@ with open(fileDir + fileName + '.csv', 'r+') as csvfile:
     
     for row in plots:
         xAxis.append(int(row[0]))
-        yAxis.append(nbr/frequency)
-        nbr += 1
+        """ yAxis.append(nbr/frequency)
+        nbr += 1 """
 
     plt.plot(xAxis, label='data from my head !!!')
     plt.show()
