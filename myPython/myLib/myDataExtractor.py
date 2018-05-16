@@ -58,9 +58,9 @@ def csvToPeriodogram(dirName, fileName):
                     dataSource.append(int(row[0]))
                 dataSource = np.array(dataSource)
 
-                sampleFrequency, powerSpectralArray = signal.periodogram(dataSource, fs, nfft=8)
+                sampleFrequency, powerSpectralArray = signal.periodogram(dataSource, fs, nfft=64)
 
-                for l in range(1, len(powerSpectralArray)):
+                for l in range(1, 4):
                     strData += "{0:.7}".format(str(powerSpectralArray[l])) + ', '
 
         strData += dirName + '\n'
