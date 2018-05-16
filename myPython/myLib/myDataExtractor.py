@@ -44,7 +44,7 @@ def csvCleaner(dirName, fileName):
 
 def csvToPeriodogram(dirName, fileName):
     filePath = '.\\csv\\csvCleanData\\' + dirName + '\\' + fileName + 'Data\\'
-    channelList = ['AF3', 'F7', 'F3', 'F4', 'F8', 'AF4']
+    channelList = ['AF3', 'F3', 'F4', 'F8', 'AF4']
     strData = ''
     fs = 128
 
@@ -61,7 +61,7 @@ def csvToPeriodogram(dirName, fileName):
                 sampleFrequency, powerSpectralArray = signal.periodogram(dataSource, fs, nfft=8)
 
                 for l in range(1, len(powerSpectralArray)):
-                    strData += str(powerSpectralArray[l]) + ', '
+                    strData += "{0:.7}".format(str(powerSpectralArray[l])) + ', '
 
         strData += dirName + '\n'
         return strData
