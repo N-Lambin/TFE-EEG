@@ -7,8 +7,8 @@ csvRecordsDirList = glob.glob(csvRecordsFile+'*')
 for i in range(0, len(csvRecordsDirList)):
     currentDirName = csvRecordsDirList[i].split('\\')[3]
     csvRecordsFileList = glob.glob(csvRecordsDirList[i]+'\\*.csv')
-    #if len(csvRecordsFileList) != 0:
     for l in range(0, len(csvRecordsFileList)):
-        print(csvRecordsFileList[l].split('\\')[4].split('.')[0])
+        csvFileName = csvRecordsFileList[l].split('\\')[4].split('.')[0]
+        mde.csvCleaner(currentDirName, csvFileName)
 
 #mde.csvCleaner('neutral', 'neutral1')
