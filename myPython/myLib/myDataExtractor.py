@@ -1,10 +1,12 @@
 import csv
 import os
+import numpy as np
 
 
-def csvCleaner(str dirName, str fileNamePath):
-    fileDir = 'python\\csv\\csvCleanData\\'
+def csvCleaner(dirName, fileName):
+    fileDir = '.\\csv\\csvCleanData\\'
     newDir = fileDir + dirName + '\\' + fileName + 'Data'
+    fileNamePath = '.\\csv\\csvRecords\\' + dirName + '\\' + fileName + '.csv'
     nbrOfRow = 0
     if not os.path.exists(newDir):
         os.makedirs(newDir)
@@ -39,3 +41,5 @@ def csvCleaner(str dirName, str fileNamePath):
                         chan.write(str(int(row[i+2].split('.')[0]))+'\n')
                         chan.close()
                 nbrOfRow += 1
+
+#def csvToPeriodogram(csvfile) -> np.array:
