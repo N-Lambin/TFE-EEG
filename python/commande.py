@@ -1,6 +1,6 @@
 import string
 import sys
-from myLib.mySSH import connectionSSH, commandSSH, closeSSH
+import myLib
 
 hostname = 'ev3dev'
 port = 22
