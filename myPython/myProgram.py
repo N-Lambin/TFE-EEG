@@ -11,4 +11,13 @@ for i in range(0, len(csvRecordsDirList)):
         csvFileName = csvRecordsFileList[l].split('\\')[4].split('.')[0]
         mde.csvCleaner(currentDirName, csvFileName)
 
-#mde.csvCleaner('neutral', 'neutral1')
+""" newFileDir = '.\\csv\\'
+    newFileName = 'csvMLData'
+    
+    if os.path.exists(newFileDir + newFileName + '.csv'):
+        os.remove(newFileDir + newFileName + '.csv')
+    
+    with open(newFileDir + newFileName + '.csv', 'a+') as csvfile: """
+
+hope = mde.csvToPeriodogram('neutral', 'neutral1')
+print(hope)

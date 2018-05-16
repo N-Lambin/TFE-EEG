@@ -1,18 +1,18 @@
 import csv
 import os
 import numpy as np
+from scipy import signal
 
 
 def csvCleaner(dirName, fileName):
-    fileDir = '.\\csv\\csvCleanData\\'
-    newDir = fileDir + dirName + '\\' + fileName + 'Data'
-    fileNamePath = '.\\csv\\csvRecords\\' + dirName + '\\' + fileName + '.csv'
+    newFileDir = '.\\csv\\csvCleanData\\' + dirName + '\\' + fileName + 'Data'
+    csvFilePath = '.\\csv\\csvRecords\\' + dirName + '\\' + fileName + '.csv'
     nbrOfRow = 0
-    if not os.path.exists(newDir):
-        os.makedirs(newDir)
+    if not os.path.exists(newFileDir):
+        os.makedirs(newFileDir)
 
         #get information of the file such as date, subject, etc and create other csv files
-        with open(fileNamePath, 'r') as csvfile:
+        with open(csvFilePath, 'r') as csvfile:
             spamreader = csv.reader(csvfile, delimiter = ',')
 
             for row in spamreader:
@@ -42,4 +42,28 @@ def csvCleaner(dirName, fileName):
                         chan.close()
                 nbrOfRow += 1
 
-#def csvToPeriodogram(csvfile) -> np.array:
+def csvToPeriodogram(dirName, fileName):
+    filePath = '.\\csv\\csvCleanData\\' + dirName + '\\' + fileName + 'Data\\'
+    channelList = ['AF3', 'F7', 'F3', 'F4', 'F8', 'AF4']
+    strData = ''
+    fs = 128
+
+    if os.path.exists(filePath):
+        for i in range(0, len(channelList)):
+            with open(filePath + channelList[i] + '.csv') as csvfile:
+                spamreader = csv.reader(csvfile, delimiter='\r')
+                dataSource = []
+
+                for row in spamreader:
+                    dataSource.append(int(row[0]))
+                dataSource = np.array(dataSource)
+
+                sampleFrequency, powerSpectralArray = signal.periodogram(dataSource, fs, nfft=8)
+
+                for l in range(1, len(powerSpectralArray)):
+                    strData += str(powerSpectralArray[l]) + ', '
+
+        strData += dirName + '\n'
+        return strData
+
+

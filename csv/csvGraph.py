@@ -4,7 +4,7 @@ import csv
 import os
 from scipy import signal
 
-fileDir = os.getcwd()+'\\python\\csv\\neutral-1Data\\'
+fileDir = os.getcwd()+'.\\csv\\csvCleanData\\neutral\\neutral1Data\\'
 fileName = "AF3"
 fs = 128
 xAxis = []
@@ -16,8 +16,11 @@ with open(fileDir + fileName + '.csv', 'r+') as csvfile:
         xAxis.append(int(row[0]))
     
     x = np.array(xAxis)
-    f, Pxx_den = signal.periodogram(x, fs, nfft=512)
+    f, Pxx_den = signal.periodogram(x, fs, nfft=8)
     """ plt.semilogy(f, Pxx_den)
     plt.show() """
-    print(f)
-    print(Pxx_den)
+    """ print(f)
+    print(Pxx_den) """
+
+    for i in range(0, len(f)):
+        print(str(int(f[i])) + ' ' + str(Pxx_den[i]))
