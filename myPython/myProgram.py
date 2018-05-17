@@ -15,8 +15,8 @@ for i in range(0, len(csvRecordsDirList)):
 newFileDir = '.\\csv\\'
 newFileName = 'csvMLData'
 
-""" channelList = ['AF3', 'F7', 'F3', 'F4', 'F8', 'AF4']
-frequencyList = ['16Hz', '32Hz', '48Hz', '64Hz'] """
+channelList = ['AF3', 'F3', 'F4', 'F8', 'AF4']
+frequencyList = ['2Hz', '4Hz', '6Hz']
 
 csvCleanData = '.\\csv\\csvCleanData\\'
 csvCleanDataDirList = glob.glob(csvCleanData + '*')
@@ -30,5 +30,5 @@ with open(newFileDir + newFileName + '.csv', 'a+') as csvfile:
         csvCleanDataDirDirList = glob.glob(csvCleanData + currentDirName1 + '\\*')
         for l in range(0, len(csvCleanDataDirDirList)):
             currentDirName2 = csvCleanDataDirDirList[l].split('\\')[4].split('Data')[0]
-            csvfile.write(mde.csvToPeriodogram(currentDirName1, currentDirName2))
+            csvfile.write(mde.csvToPeriodogram(currentDirName1, currentDirName2, channelList))
 

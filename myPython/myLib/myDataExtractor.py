@@ -42,9 +42,8 @@ def csvCleaner(dirName, fileName):
                         chan.close()
                 nbrOfRow += 1
 
-def csvToPeriodogram(dirName, fileName):
+def csvToPeriodogram(dirName, fileName, channelList):
     filePath = '.\\csv\\csvCleanData\\' + dirName + '\\' + fileName + 'Data\\'
-    channelList = ['AF3', 'F3', 'F4', 'F8', 'AF4']
     strData = ''
     fs = 128
 
