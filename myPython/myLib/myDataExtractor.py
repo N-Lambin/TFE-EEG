@@ -35,7 +35,7 @@ def csvCleaner(dirName, fileName):
 
             #get information from channels and put it in a different csv file for each channel
             for row in spamreader:
-                if nbrOfRow > 6400:
+                if nbrOfRow > 1280:
                     for i in range(0, len(channelList)):
                         chan = open(newFileDir + '/' + channelList[i] + '.csv', 'a')
                         chan.write(str(int(row[i+2].split('.')[0]))+'\n')
