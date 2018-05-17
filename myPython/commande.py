@@ -1,6 +1,6 @@
 import string
 import sys
-import myLib
+import myLib.mySSH as ssh
 
 hostname = 'ev3dev'
 port = 22
@@ -8,7 +8,7 @@ username = 'robot'
 password = 'maker'
 
 try:
-    client = connectionSSH(hostname, port, username, password)
+    client = ssh.connectionSSH(hostname, port, username, password)
     isConnected = True
     try:
         while isConnected:
@@ -17,20 +17,20 @@ try:
             if (command == 'a'):
                 isConnected = False
             elif (command == 'z'):
-                commandSSH(client, './forward.sh')
+                ssh.commandSSH(client, './forward.sh')
             elif (command == 's'):
-                commandSSH(client, './backward.sh')
+                ssh.commandSSH(client, './backward.sh')
             elif (command == 'q'):
-                commandSSH(client, './left.sh')
+                ssh.commandSSH(client, './left.sh')
             elif (command == 'd'):
-                commandSSH(client, './right.sh')
+                ssh.commandSSH(client, './right.sh')
             elif (command == 'e'):
-                commandSSH(client, './hold.sh')
+                ssh.commandSSH(client, './hold.sh')
             elif (command == 'r'):
-                commandSSH(client, './release.sh')
+                ssh.commandSSH(client, './release.sh')
             else:
                 print ('Command not found')
     finally:
-        closeSSH(client)
+        ssh.closeSSH(client)
 except:
     print('no client found')
