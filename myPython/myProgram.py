@@ -31,4 +31,3 @@ with open(newFileDir + newFileName + '.csv', 'a+') as csvfile:
         for l in range(0, len(csvCleanDataDirDirList)):
             currentDirName2 = csvCleanDataDirDirList[l].split('\\')[4].split('Data')[0]
             csvfile.write(mde.csvToPeriodogram(currentDirName1, currentDirName2, channelList))
-

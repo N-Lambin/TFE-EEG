@@ -64,5 +64,3 @@ def csvToPeriodogram(dirName, fileName, channelList):
 
         strData += dirName + '\n'
         return strData
-
-
