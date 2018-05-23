@@ -26,8 +26,8 @@ if os.path.exists(newFileDir + newFileName + '.csv'):
     
 with open(newFileDir + newFileName + '.csv', 'a+') as csvfile:
     for i in range(0, len(csvCleanDataDirList)):
-        currentDirName = csvCleanDataDirList[i].split('\\')[3]
-        csvCleanDataDirDirList = glob.glob(csvCleanData + currentDirName + '\\*')
+        currentDirName1 = csvCleanDataDirList[i].split('\\')[3]
+        csvCleanDataDirDirList = glob.glob(csvCleanData + currentDirName1 + '\\*')
         for l in range(0, len(csvCleanDataDirDirList)):
-            currentDirDirName = csvCleanDataDirDirList[l].split('\\')[4].split('Data')[0]
-            csvfile.write(mde.csvToPeriodogram(currentDirName, currentDirDirName, channelList, 64))
+            currentDirName2 = csvCleanDataDirDirList[l].split('\\')[4].split('Data')[0]
+            csvfile.write(mde.csvToPeriodogram(currentDirName1, currentDirName2, channelList, 64))
