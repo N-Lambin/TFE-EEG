@@ -16,7 +16,7 @@ newFileDir = '.\\csv\\'
 newFileName = 'csvMLData'
 
 channelList = ['AF3', 'F3', 'F4', 'F8', 'AF4']
-frequencyList = ['2Hz', '4Hz', '6Hz']
+frequencyList = ['2Hz', '4Hz']
 
 csvCleanData = '.\\csv\\csvCleanData\\'
 csvCleanDataDirList = glob.glob(csvCleanData + '*')
