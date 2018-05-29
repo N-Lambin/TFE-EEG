@@ -13,9 +13,10 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
-names = ['AF3-2Hz', 'AF3-4Hz', 'F3-2Hz', 'F3-4Hz', 'F4-2Hz', 'F4-4Hz', 'F8-2Hz', 'F8-4Hz', 'AF4-2Hz', 'AF4-4Hz', 'class']
+names1 = ['AF3-2Hz', 'AF3-4Hz', 'F3-2Hz', 'F3-4Hz', 'F4-2Hz', 'F4-4Hz', 'F8-2Hz', 'F8-4Hz', 'AF4-2Hz', 'AF4-4Hz', 'class']
+names2 = ['AF3-2Hz',  'F3-2Hz', 'F4-2Hz', 'F8-2Hz', 'AF4-2Hz', 'class']
 
-dataset = pandas.read_csv('.\\csv\\csvMLData.csv', names=names)
+dataset = pandas.read_csv('.\\csv\\csvMLData.csv', names=names1)
 
 # Split-out validation dataset
 array = dataset.values
@@ -45,5 +46,5 @@ for name, model in models:
 	cv_results = model_selection.cross_val_score(model, X_train, Y_train, cv=kfold, scoring=scoring)
 	results.append(cv_results)
 	names.append(name)
-	msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
+	msg = "%s: %f (%f)" % (name, cv_results.mean()*100, cv_results.std()*100)
 	print(msg)
