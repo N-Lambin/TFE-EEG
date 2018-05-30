@@ -1,9 +1,11 @@
 import paramiko
 import sys
+import numpy as np
+import time
 
 #example of parameters
 hostname = 'ev3dev'
-port = 1515
+port = 22
 username = 'robot' 
 password = 'maker'
 nbytes = 4096
@@ -31,9 +33,9 @@ def commandSSH(client, command):
             if session.exit_status_ready():
                 break
 
-        print ('exit status: '.join(session.recv_exit_status()))
-        print (''.join(stdout_data))
-        print (''.join(stderr_data))
+        """ print ('exit status: '.join(np.array(session.recv_exit_status())))
+        print (''.join(np.array(stdout_data)))
+        print (''.join(np.array(stderr_data))) """
 
     finally:
         session.close()
@@ -41,3 +43,17 @@ def commandSSH(client, command):
 def closeSSH(client):
     client.close()
     print ('Fermeture du client ssh')
+
+def moveFrancis(client):
+    ssh.commandSSH(client, './forward.sh')
+    time.sleep(1)
+    ssh.commandSSH(client, './backward.sh')
+    time.sleep(1)
+    ssh.commandSSH(client, './left.sh')
+    time.sleep(1)
+    ssh.commandSSH(client, './right.sh')
+    time.sleep(1)
+    ssh.commandSSH(client, './hold.sh')
+    time.sleep(1)
+    ssh.commandSSH(client, './release.sh')
+    time.sleep(1)

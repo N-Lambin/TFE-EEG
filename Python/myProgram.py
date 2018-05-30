@@ -1,4 +1,4 @@
-import string
+#import string
 import sys
 import myLib.mySSH as ssh
 import myLib.mySupervisedLearning as msl
@@ -10,7 +10,6 @@ username = 'robot'
 password = 'maker'
 
 model = msl.trainingDecisionTree()
-
 command = model.predict(Xnew)
 
 try:
@@ -18,9 +17,11 @@ try:
     isConnected = True
     try:
         while isConnected:
+            command = input('Enter command here \n')
+            command = command.replace('\r', '')
             if (command == 'a'):
                 isConnected = False
-            elif (command == 'neutral'):
+            elif (command == ' neutral'):
                 ssh.commandSSH(client, './forward.sh')
             elif (command == 's'):
                 ssh.commandSSH(client, './backward.sh')
@@ -37,4 +38,4 @@ try:
     finally:
         ssh.closeSSH(client)
 except:
-    print('no client found')
+    print ('no client found')
