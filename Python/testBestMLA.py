@@ -22,7 +22,7 @@ dataset = pandas.read_csv('.\\csv\\csvMLData.csv', names=names1)
 array = dataset.values
 X = array[:,0:10]
 Y = array[:,10]
-validation_size = 0.20
+validation_size = 0.10
 seed = 7
 X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y, test_size=validation_size, random_state=seed)
 
