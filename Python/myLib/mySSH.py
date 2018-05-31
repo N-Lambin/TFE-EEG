@@ -42,7 +42,7 @@ def commandSSH(client, command):
 
 def closeSSH(client):
     client.close()
-    print ('Fermeture du client ssh')
+    print ('Close of the SSH-client')
 
 def moveFrancis(client):
     ssh.commandSSH(client, './forward.sh')
