@@ -9,7 +9,7 @@ command = model.predict(data)
 
 print ('Class : ' + command)
 proba = model.predict_proba(data)
-print ('Proba par class : ' + proba)
+print ('Proba par class : ' + str(proba))
 
 hostname = 'ev3dev'
 port = 22
