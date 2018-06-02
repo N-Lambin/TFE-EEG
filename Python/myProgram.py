@@ -2,9 +2,9 @@ import sys
 import myLib.mySSH as ssh
 import myLib.mySupervisedLearning as msl
 
-data = [[37.6695, 5.56588, 6.60943, 9.56798, 20.6567, 5.13102, 1.44630, 0.43651, 0.04982, 0.15489]]
-
 model = msl.trainingDecisionTree()
+
+data = [[37.6695, 5.56588, 6.60943, 9.56798, 20.6567, 5.13102, 1.44630, 0.43651, 0.04982, 0.15489]]
 command = model.predict(data)
 
 hostname = 'ev3dev'
