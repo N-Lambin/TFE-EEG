@@ -7,6 +7,10 @@ model = msl.trainingDecisionTree()
 data = [[37.6695, 5.56588, 6.60943, 9.56798, 20.6567, 5.13102, 1.44630, 0.43651, 0.04982, 0.15489]]
 command = model.predict(data)
 
+print ('Class : ' + command)
+proba = model.predict_proba(data)
+print ('Proba par class : ' + proba)
+
 hostname = 'ev3dev'
 port = 22
 username = 'robot' 
