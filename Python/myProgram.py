@@ -5,13 +5,7 @@ import myLib.mySupervisedLearning as msl
 model = msl.trainingDecisionTree()
 
 data = [[37.6695, 5.56588, 6.60943, 9.56798, 20.6567, 5.13102, 1.44630, 0.43651, 0.04982, 0.15489]]
-
 command = model.predict(data)
-print ('Class : ' + command)
-
-proba = model.predict_proba(data)
-print ('Probabilité neutral : ' + str(proba[0][0]))
-print ('Probabilité winkLeft : ' + str(proba[0][1]))
 
 hostname = 'ev3dev'
 port = 22
