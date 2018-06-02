@@ -38,4 +38,4 @@ try:
     finally:
         ssh.closeSSH(client)
 except:
-    print ('no client found')
+    print ('No client found !')
