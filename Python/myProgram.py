@@ -1,16 +1,16 @@
-#import string
 import sys
 import myLib.mySSH as ssh
 import myLib.mySupervisedLearning as msl
 
-Xnew = [[37.6695, 5.56588, 6.60943, 9.56798, 20.6567, 5.13102, 1.44630, 0.43651, 0.04982, 0.15489]]
+data = [[37.6695, 5.56588, 6.60943, 9.56798, 20.6567, 5.13102, 1.44630, 0.43651, 0.04982, 0.15489]]
+
+model = msl.trainingDecisionTree()
+command = model.predict(data)
+
 hostname = 'ev3dev'
 port = 22
 username = 'robot' 
 password = 'maker'
-
-model = msl.trainingDecisionTree()
-command = model.predict(Xnew)
 
 try:
     client = ssh.connectionSSH(hostname, port, username, password)
