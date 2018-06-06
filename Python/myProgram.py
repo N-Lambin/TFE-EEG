@@ -6,8 +6,9 @@ model = msl.trainingDecisionTree()
 
 data = [[37.6695, 5.56588, 6.60943, 9.56798, 20.6567, 5.13102, 1.44630, 0.43651, 0.04982, 0.15489]]
 command = model.predict(data)
+print(command)
 
-hostname = 'ev3dev'
+""" hostname = 'ev3dev'
 port = 22
 username = 'robot' 
 password = 'maker'
@@ -21,11 +22,11 @@ try:
             command = command.replace('\r', '')
             if (command == 'a'):
                 isConnected = False
-            elif (command == ' neutral'):
+            elif (command == 'neutral'):
                 ssh.commandSSH(client, './forward.sh')
             elif (command == 's'):
                 ssh.commandSSH(client, './backward.sh')
-            elif (command == ' winkLeft'):
+            elif (command == 'winkLeft'):
                 ssh.commandSSH(client, './left.sh')
             elif (command == 'd'):
                 ssh.commandSSH(client, './right.sh')
@@ -38,4 +39,4 @@ try:
     finally:
         ssh.closeSSH(client)
 except:
-    print ('No client found !')
+    print ('No client found !') """

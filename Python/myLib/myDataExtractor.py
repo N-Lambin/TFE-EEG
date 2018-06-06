@@ -62,7 +62,7 @@ def csvToPeriodogram(dirName, fileName, channelList, nfft):
                 frequencySampleList, powerSpectralArray = signal.periodogram(dataSource, fs, nfft=nfft)
 
                 for l in range(1, 3):
-                    strData += "{0:.7}".format(str(powerSpectralArray[l])) + ', '
+                    strData += "{0:.7}".format(str(powerSpectralArray[l])) + ','
 
         strData += dirName + '\n'
         return strData
