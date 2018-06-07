@@ -15,6 +15,3 @@ def trainingDecisionTree():
     model.fit(X, Y)
 
     return model
-
-
-
