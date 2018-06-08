@@ -29,38 +29,39 @@ def authorize(client_id, client_secret, license):
 def queryHeadsets():
     query_json = sendToApi(json.dumps({ 'jsonrpc': '2.0', 'method': 'queryHeadsets', 'params': \
         { } , 'id': 1 }))
+    return json.loads(query_json)["result"]
 
 def createSession(token):
     session_json = sendToApi(json.dumps({ 'jsonrpc': '2.0', 'method': 'createSession', 'params': \
         { '_auth': token, 'status': 'open' } , 'id': 1 }))
-    return json.loads(session_json)["result"]["status"]
+    return json.loads(session_json)["result"]["status"], json.loads(session_json)["result"]["id"]
 
-def activeSession(token):
+def activeSession(token, sid):
     activeSession_json = sendToApi(json.dumps({ 'jsonrpc': '2.0', 'method': 'updateSession', 'params': \
-        { '_auth': token, 'status': 'active' } , 'id': 1 }))
+        { '_auth': token, 'session': sid, 'status': 'active' } , 'id': 1 }))
     return json.loads(activeSession_json)#["result"]["status"]
 
-def startRecord(token, id):
+def startRecord(token, sid):
     startRecord_json = sendToApi(json.dumps({ 'jsonrpc': '2.0', 'method': 'updateSession', 'params': \
-        { '_auth': token, 'status': 'startRecord', 'session': id } , 'id': 1 }))
+        { '_auth': token, 'status': 'startRecord', 'session': sid } , 'id': 1 }))
     return json.loads(startRecord_json)["result"]["status"]
 
-def stopRecord(token, id):
+def stopRecord(token, sid):
     stopRecord_json = sendToApi(json.dumps({ 'jsonrpc': '2.0', 'method': 'updateSession', 'params': \
-        { '_auth': token, 'status': 'stopRecord', 'session': id } , 'id': 1 }))
+        { '_auth': token, 'status': 'stopRecord', 'session': sid } , 'id': 1 }))
     return json.loads(stopRecord_json)["result"]["status"]
 
-def closeSession(token, id):
+def closeSession(token, sid):
     closeSession_json = sendToApi(json.dumps({ 'jsonrpc': '2.0', 'method': 'updateSession', 'params': \
-        { '_auth': token, 'status': 'close', 'session': id } , 'id': 1 }))
+        { '_auth': token, 'status': 'close', 'session': sid } , 'id': 1 }))
     return json.loads(closeSession_json)["result"]["status"]
 
-def subscribe(token):
+def subscribe(token, sid):
     data = sendToApi(json.dumps({ 'jsonrpc': '2.0', 'method': 'subscribe', 'params': \
-        { '_auth': token, 'streams': [ 'eeg' ], 'replay': 'false' } , 'id': 1 }))
-    return json.loads(data)["result"]["sid"]
-
+        { '_auth': token, 'streams': [ 'mot' ], 'session': sid } , 'id': 1 })) 
+    return json.loads(data)#["result"]["sid"]
+""" , 'session': sid, 'replay': 'false' """
 def unsubscribe(token, sid):
     message = sendToApi(json.dumps({ 'jsonrpc': '2.0', 'method': 'unsubscribe', 'params': \
-        { '_auth': token, 'streams': [ 'eeg' ], 'session': sid, 'replay': 'false' } , 'id': 1 }))
-    return json.loads(message)["result"]["message"]
+        { '_auth': token, 'streams': [ 'mot' ], 'session': sid } , 'id': 1 }))
+    return json.loads(message)#["result"]["message"]
