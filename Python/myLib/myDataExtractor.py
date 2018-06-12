@@ -51,7 +51,7 @@ def csvToPeriodogram(dirName, fileName, channelList, nfft):
 
     if os.path.exists(filePath):
         for i in range(0, len(channelList)):
-            with open(filePath + channelList[i] + '.csv') as csvfile:
+            with open(filePath + channelList[i] + '.csv', 'r') as csvfile:
                 spamreader = csv.reader(csvfile, delimiter='\r')
                 dataSource = []
 
