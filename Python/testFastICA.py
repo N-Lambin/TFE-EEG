@@ -36,29 +36,35 @@ fs4, psa4 = csvReader("D:\\noela\\Documents\\3TI\\TFE\\github\\csv\\csvCleanData
 fs6, psa6 = csvReader("D:\\noela\\Documents\\3TI\\TFE\\github\\csv\\csvCleanData\\winkLeft\\winkLeft6Data\\AF3.csv")
 fs7, psa7 = csvReader("D:\\noela\\Documents\\3TI\\TFE\\github\\csv\\csvCleanData\\winkLeft\\winkLeft7Data\\AF3.csv") """
 
-print(fs7[1])
-
 X1 = np.c_[np.array(fs1), np.array(fs2), np.array(fs3), np.array(fs4), np.array(fs6), np.array(fs7)]
-X2 = np.c_[np.array(psa1), np.array(psa2), np.array(psa3), np.array(psa4), np.array(psa6), np.array(psa7)]
+#X2 = np.c_[np.array(psa1), np.array(psa2), np.array(psa3), np.array(psa4), np.array(psa6), np.array(psa7)]
 
-# Compute ICA
+# ICA
 ica = FastICA(n_components=3)
-S_ = ica.fit_transform(X1)  # Reconstruct signals
-A_ = ica.mixing_  # Get estimated mixing matrix
+S_ = np.array(ica.fit_transform(X1)) # Reconstruct signals
 
-# For comparison, compute PCA
+fs_1, psa_1 = signal.periodogram(S_[:,0], 128, nfft=nfft)
+fs_2, psa_2 = signal.periodogram(S_[:,1], 128, nfft=nfft)
+fs_3, psa_3 = signal.periodogram(S_[:,2], 128, nfft=nfft)
+
+X2 = np.c_[np.array(psa_1), np.array(psa_2)]
+
+# PCA
 pca = PCA(n_components=3)
-H = pca.fit_transform(X2)  # Reconstruct signals based on orthogonal components
+H = pca.fit_transform(X1)
 
-# #############################################################################
-# Plot results
+""" fs_1, psa_1 = signal.periodogram(H[:,0], 128, nfft=nfft)
+fs_2, psa_2 = signal.periodogram(H[:,1], 128, nfft=nfft)
+fs_3, psa_3 = signal.periodogram(H[:,2], 128, nfft=nfft)
+
+X2 = np.c_[np.array(psa_1), np.array(psa_2), np.array(psa_3)] """
 
 plt.figure()
 
-models = [X1, S_, H]
-names = ['Observations (mixed signal)',
-         'ICA recovered signals',
-         'PCA recovered signals']
+models = [X1, S_, X2]
+names = ['Signaux EEG sources',
+         'Signaux récupérés via PCA',
+         'Périodogramme des signaux récupérés']
 colors = ['red', 'blue', 'green', 'yellow', 'cyan', 'magenta']
 
 for ii, (model, name) in enumerate(zip(models, names), 1):
@@ -67,5 +73,5 @@ for ii, (model, name) in enumerate(zip(models, names), 1):
     for sig, color in zip(model.T, colors):
         plt.plot(sig, color=color)
 
-#plt.subplots_adjust(0.09, 0.04, 0.94, 0.94, 0.26, 0.46)
+plt.subplots_adjust(0.09, 0.04, 0.94, 0.94, 0.26, 0.46)
 plt.show()
