@@ -42,22 +42,33 @@ fp1, sp1 = signal.periodogram(s1, fs=fs, nfft=nfft)
 fp2, sp2 = signal.periodogram(s2, fs=fs, nfft=nfft)
 fp3, sp3 = signal.periodogram(s3, fs=fs, nfft=nfft)
 
+""" ac1 = np.correlate(s1, s1, mode='full')
+ac1 = np.resize(ac1, 600)
+ac1fft = np.fft.rfft(ac1)
+ac1fft = np.square(ac1fft) """
 
-plt.subplot(311)
+
+plt.subplot(411)
 plt.plot(s1, color='red')
 plt.plot(s2, color='green')
 plt.plot(s3, color='blue')
 plt.title('signaux sources')
 
-plt.subplot(312)
+plt.subplot(412)
 plt.plot(sx1, color='red')
 #plt.plot(sx2, color='green')
 #plt.plot(sx3, color='blue')
 
-plt.subplot(313)
+plt.subplot(413)
 plt.plot(sp1, color='red')
 plt.plot(sp2, color='green')
 plt.plot(sp3, color='blue')
+
+""" plt.subplot(413)
+plt.plot(ac1, color='red')
+
+plt.subplot(414)
+plt.plot(ac1fft, color='blue') """
 
 plt.subplots_adjust(0.09, 0.04, 0.94, 0.94, 0.26, 0.46)
 plt.show()
