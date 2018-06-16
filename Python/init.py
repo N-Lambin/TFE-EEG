@@ -38,10 +38,3 @@ with open(newFileDir + newFileName + '.csv', 'a+') as csvfile:
 
 #train the supervised learning algorithm
 model = msl.trainingDecisionTree()
-
-#exemple of prediction
-""" data = [[37.6695, 5.56588, 6.60943, 9.56798, 20.6567, 5.13102, 1.44630, 0.43651, 0.04982, 0.15489]]
-command = model.predict(data) """
-
-#get the token for the API connection
-token = mco.getToken()

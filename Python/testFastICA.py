@@ -6,7 +6,7 @@ from scipy import signal
 from sklearn.decomposition import FastICA, PCA
 
 fs=128
-nfft=128
+nfft=256
 
 def csvReader(filePath):
     with open(filePath, 'r') as csvfile:
@@ -18,7 +18,7 @@ def csvReader(filePath):
         dataSource = np.resize(np.array(dataSource), 600)
 
 
-        fs, psa = signal.periodogram(dataSource, 128, nfft=nfft)
+        fs, t, psa = signal.spectrogram(dataSource, 128, nfft=nfft)
         return dataSource, psa
 
 
@@ -43,9 +43,9 @@ X1 = np.c_[np.array(fs1), np.array(fs2), np.array(fs3), np.array(fs4), np.array(
 ica = FastICA(n_components=3)
 S_ = np.array(ica.fit_transform(X1)) # Reconstruct signals
 
-fs_1, psa_1 = signal.periodogram(S_[:,0], 128, nfft=nfft)
-fs_2, psa_2 = signal.periodogram(S_[:,1], 128, nfft=nfft)
-fs_3, psa_3 = signal.periodogram(S_[:,2], 128, nfft=nfft)
+fs_1, t1, psa_1 = signal.spectrogram(S_[:,0], 128, nfft=nfft)
+fs_2, t2, psa_2 = signal.spectrogram(S_[:,1], 128, nfft=nfft)
+fs_3, t3, psa_3 = signal.spectrogram(S_[:,2], 128, nfft=nfft)
 
 X2 = np.c_[np.array(psa_1), np.array(psa_2)]
 
@@ -62,8 +62,8 @@ X2 = np.c_[np.array(psa_1), np.array(psa_2), np.array(psa_3)] """
 plt.figure()
 
 models = [X1, S_, X2]
-names = ['Signaux EEG sources',
-         'Signaux récupérés via PCA',
+names = ['Signaux EEG',
+         'Signaux récupérés via ICA',
          'Périodogramme des signaux récupérés']
 colors = ['red', 'blue', 'green', 'yellow', 'cyan', 'magenta']
 
