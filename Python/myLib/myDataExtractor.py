@@ -2,6 +2,7 @@ import csv
 import os
 import numpy as np
 from scipy import signal
+from sklearn.decomposition import FastICA
 
 def infoToTxt(newFileDir, row):
     with open(newFileDir + '/info.txt', 'w+') as info:
@@ -44,25 +45,47 @@ def csvCleaner(dirName, fileName):
                         chan.close()
                 nbrOfRow += 1
 
-def csvToPeriodogram(dirName, fileName, channelList, nfft):
-    filePath = '.\\csv\\csvCleanData\\' + dirName + '\\' + fileName + 'Data\\'
+def csvToPSA(dirName, fileName, channelList, nfft, fs):
+    signal1 = openFile(dirName, fileName, channelList[0])
+    signal2 = openFile(dirName, fileName, channelList[1])
+    signal3 = openFile(dirName, fileName, channelList[2])
+    signal4 = openFile(dirName, fileName, channelList[3])
+    signal5 = openFile(dirName, fileName, channelList[4])
+    signal6 = openFile(dirName, fileName, channelList[5])
+    signal7 = openFile(dirName, fileName, channelList[6])
+    signal8 = openFile(dirName, fileName, channelList[7])
+
+    dataSourceArray = np.c_[fastICA(signal1, signal2, signal3, signal4), fastICA(signal5, signal6, signal7, signal8)]
     strData = ''
-    fs = 128
+
+    for i in range(0, 4):
+        dataSource = dataSourceArray[i,:]
+        frequencySampleList, powerSpectralArray = signal.periodogram(dataSource, fs=fs, nfft=nfft)
+
+        for l in range(1, 3):
+            strData += "{0:.7}".format(str(powerSpectralArray[l])) + ','
+
+    strData += dirName + '\n'
+    return strData
+
+def openFile(dirName, fileName, captor):
+    filePath = '.\\csv\\csvCleanData\\' + dirName + '\\' + fileName + 'Data\\'
+    dataSource = []
 
     if os.path.exists(filePath):
-        for i in range(0, len(channelList)):
-            with open(filePath + channelList[i] + '.csv', 'r') as csvfile:
-                spamreader = csv.reader(csvfile, delimiter='\r')
-                dataSource = []
+        with open(filePath + captor + '.csv', 'r') as csvfile:
+            spamreader = csv.reader(csvfile, delimiter='\r')
 
-                for row in spamreader:
-                    dataSource.append(int(row[0]))
-                dataSource = np.array(dataSource)
+            for row in spamreader:
+                dataSource.append(int(row[0]))
+            dataSource = np.array(dataSource)
 
-                frequencySampleList, powerSpectralArray = signal.periodogram(dataSource, fs, nfft=nfft)
+            return dataSource
 
-                for l in range(1, 3):
-                    strData += "{0:.7}".format(str(powerSpectralArray[l])) + ','
+def fastICA(signal1, signal2, signal3, signal4):
+    signalsArray = np.c_[signal1, signal2, signal3, signal4]
+    ica = FastICA(n_components=2 )
+    #max_iter=1000, tol=0.1
+    S_ = np.array(ica.fit_transform(signalsArray))
 
-        strData += dirName + '\n'
-        return strData
+    return S_

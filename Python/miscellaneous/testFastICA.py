@@ -21,7 +21,6 @@ def csvReader(filePath):
         fs, t, psa = signal.spectrogram(dataSource, 128, nfft=nfft)
         return dataSource, psa
 
-
 fs1, psa1 = csvReader("D:\\noela\\Documents\\3TI\\TFE\\github\\csv\\csvCleanData\\winkLeft\\winkLeft11Data\\AF3.csv")
 fs2, psa2 = csvReader("D:\\noela\\Documents\\3TI\\TFE\\github\\csv\\csvCleanData\\winkLeft\\winkLeft11Data\\AF4.csv")
 fs3, psa3 = csvReader("D:\\noela\\Documents\\3TI\\TFE\\github\\csv\\csvCleanData\\winkLeft\\winkLeft11Data\\F3.csv")

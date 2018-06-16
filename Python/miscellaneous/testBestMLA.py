@@ -8,13 +8,13 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
-names = ['AF3-2Hz', 'AF3-4Hz', 'F3-2Hz', 'F3-4Hz', 'F4-2Hz', 'F4-4Hz', 'F8-2Hz', 'F8-4Hz', 'AF4-2Hz', 'AF4-4Hz', 'class']
+names = ['ICA1', 'ICA1bis', 'ICA2', 'ICA2bis', 'ICA3', 'ICA3bis', 'ICA4', 'ICA4bis', 'class']
 dataset = pandas.read_csv('.\\csv\\csvMLData.csv', names=names)
 
 # Split-out validation dataset
 array = dataset.values
-X = array[:,0:10]
-Y = array[:,10]
+X = array[:,0:8]
+Y = array[:,8]
 validation_size = 0.10
 seed = 7
 X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y, test_size=validation_size, random_state=seed)

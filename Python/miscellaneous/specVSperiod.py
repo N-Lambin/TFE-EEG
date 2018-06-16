@@ -38,9 +38,9 @@ fs1, ts1, sx1 = signal.spectrogram(s1, fs=fs, nfft=nfft, nperseg=nperseg)
 fs2, ts2, sx2 = signal.spectrogram(s2, fs=fs, nfft=nfft, nperseg=nperseg)
 fs3, ts3, sx3 = signal.spectrogram(s3, fs=fs, nfft=nfft, nperseg=nperseg)
 
-fp1, sp1 = signal.periodogram(s1, fs=fs, nfft=nfft)
-fp2, sp2 = signal.periodogram(s2, fs=fs, nfft=nfft)
-fp3, sp3 = signal.periodogram(s3, fs=fs, nfft=nfft)
+fp1, sp1 = signal.periodogram(s1, fs=fs, nfft=nfft, scaling='spectrum')
+fp2, sp2 = signal.periodogram(s2, fs=fs, nfft=nfft, scaling='spectrum')
+fp3, sp3 = signal.periodogram(s3, fs=fs, nfft=nfft, scaling='spectrum')
 
 """ ac1 = np.correlate(s1, s1, mode='full')
 ac1 = np.resize(ac1, 600)
