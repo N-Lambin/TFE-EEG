@@ -19,7 +19,7 @@ dataset = pandas.read_csv('.\\csv\\pcaData.csv', names=names)
 array = dataset.values
 X = array[:,0:6]
 Y = array[:,6]
-validation_size = 0.10
+validation_size = 0.05
 seed = 7
 X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y, test_size=validation_size, random_state=seed)
 
@@ -37,9 +37,9 @@ results = []
 names = []
 scoring = 'accuracy'
 for name, model in models:
-	kfold = model_selection.KFold(n_splits=3, shuffle=True, random_state=seed)
+	kfold = model_selection.KFold(n_splits=7, shuffle=True, random_state=seed)
 	cv_results = model_selection.cross_val_score(model, X_train, Y_train, cv=kfold, scoring=scoring)
 	results.append(cv_results)
 	names.append(name)
-	msg = "{}: {:.2f} % {:.2f}".format(name, cv_results.mean()*100, cv_results.std())
+	msg = "{}: {:.2f} % ({:.2f})".format(name, cv_results.mean()*100, cv_results.std()*100)
 	print(msg)

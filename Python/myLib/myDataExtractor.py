@@ -57,15 +57,17 @@ def csvToPSA(dirName, fileName, channelList, nfft, fs):
     signal9 = openFile(dirName, fileName, channelList[8])
     signal10 = openFile(dirName, fileName, channelList[9])
 
-    dataSourceArray = np.c_[fastICA(signal1, signal2, signal3, signal4, signal5), \
-        fastICA(signal6, signal7, signal8, signal9, signal10)]
+    #dataSourceArray = np.c_[fastICA(signal1, signal2, signal3, signal4, signal5), \
+    #    fastICA(signal6, signal7, signal8, signal9, signal10)]
+    dataSourceArray = np.c_[signal1, signal2, signal3, signal4, signal5, \
+        signal6, signal7, signal8, signal9, signal10]
     strData = ''
 
-    for i in range(0, 6):
+    for i in range(0, 10):
         dataSource = dataSourceArray[i,:]
         frequencySampleList, powerSpectralArray = signal.periodogram(dataSource, fs=fs, nfft=nfft)
 
-        for l in range(1,5,2):
+        for l in range(1,3):
             strData += "{0:.7}".format(str(powerSpectralArray[l])) + ','
 
     strData += dirName + '\n'
