@@ -3,11 +3,10 @@ import myLib.myCommand as mco
 import myLib.mySSH as ssh
 import time
 
-init
 model = init.model
 
 #exemple of prediction
-data = [[37.6695, 5.56588, 6.60943, 9.56798, 20.6567, 5.13102, 1.44630, 0.43651, 0.04982, 0.15489]]
+data = [[1.12099,1.01106,2.73168,2.40717,3.69027,3.25942,1.15452,1.03170]]
 command = model.predict(data)
 
 print(command)

@@ -16,8 +16,7 @@ def csvReader(filePath):
         for row in spamreader:
             dataSource.append(int(row[0]))
         dataSource = np.resize(np.array(dataSource), 600)
-
-
+        
         fs, t, psa = signal.spectrogram(dataSource, 128, nfft=nfft)
         return dataSource, psa
 

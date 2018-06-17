@@ -19,7 +19,7 @@ for i in range(0, len(csvRecordsDirList)):
 newFileDir = '.\\csv\\'
 newFileName = 'csvMLData'
 
-channelList = ['AF3', 'F7', 'F3', 'FC5', 'FC6', 'F4', 'F8', 'AF4']
+channelList = ['AF3', 'F7', 'F3', 'FC5','T7', 'T8', 'FC6', 'F4', 'F8', 'AF4']
 frequencyList = ['2Hz', '4Hz']
 
 csvCleanData = '.\\csv\\csvCleanData\\'
@@ -37,4 +37,4 @@ with open(newFileDir + newFileName + '.csv', 'a+') as csvfile:
             csvfile.write(mde.csvToPSA(currentDirName1, currentDirName2, channelList, 64, 64))
 
 #train the supervised learning algorithm
-#model = msl.trainingDecisionTree()
+model = msl.trainingDecisionTree()

@@ -54,15 +54,18 @@ def csvToPSA(dirName, fileName, channelList, nfft, fs):
     signal6 = openFile(dirName, fileName, channelList[5])
     signal7 = openFile(dirName, fileName, channelList[6])
     signal8 = openFile(dirName, fileName, channelList[7])
+    signal9 = openFile(dirName, fileName, channelList[8])
+    signal10 = openFile(dirName, fileName, channelList[9])
 
-    dataSourceArray = np.c_[fastICA(signal1, signal2, signal3, signal4), fastICA(signal5, signal6, signal7, signal8)]
+    dataSourceArray = np.c_[fastICA(signal1, signal2, signal3, signal4, signal5), \
+        fastICA(signal6, signal7, signal8, signal9, signal10)]
     strData = ''
 
-    for i in range(0, 4):
+    for i in range(0, 6):
         dataSource = dataSourceArray[i,:]
         frequencySampleList, powerSpectralArray = signal.periodogram(dataSource, fs=fs, nfft=nfft)
 
-        for l in range(1, 3):
+        for l in range(1,5,2):
             strData += "{0:.7}".format(str(powerSpectralArray[l])) + ','
 
     strData += dirName + '\n'
@@ -82,10 +85,9 @@ def openFile(dirName, fileName, captor):
 
             return dataSource
 
-def fastICA(signal1, signal2, signal3, signal4):
-    signalsArray = np.c_[signal1, signal2, signal3, signal4]
-    ica = FastICA(n_components=2 )
-    #max_iter=1000, tol=0.1
+def fastICA(signal1, signal2, signal3, signal4, signal5):
+    signalsArray = np.c_[signal1, signal2, signal3, signal4, signal5]
+    ica = FastICA(n_components=3, max_iter=5000, tol=0.5)
     S_ = np.array(ica.fit_transform(signalsArray))
 
     return S_
