@@ -9,7 +9,6 @@ port = 22
 username = 'robot' 
 password = 'maker'
 nbytes = 4096
-command = 'ls'
 
 def connectionSSH(hostname, port, username, password):
     client = paramiko.Transport((hostname, port))
@@ -33,16 +32,15 @@ def commandSSH(client, command):
             if session.exit_status_ready():
                 break
 
-        print ('exit status: ' + session.recv_exit_status())
-        print ('' + stdout_data)
-        print ('' + stderr_data)
+        print ('exit status: ', session.recv_exit_status())
+        print (' '.join(stdout_data))
+        print (' '.join(stderr_data))
 
     finally:
         session.close()
 
 def closeSSH(client):
     client.close()
-    print ('Close of the SSH-client')
 
 def moveFrancis(client):
     ssh.commandSSH(client, './forward.sh')

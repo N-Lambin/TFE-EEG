@@ -8,17 +8,14 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
-#names = ['ICA1', 'ICA1bis', 'ICA1bis1', 'ICA2', 'ICA2bis','ICA2bis2', 'ICA3', 'ICA3bis', 'ICA3bis3','ICA4', 'ICA4bis', 'ICA4bis4', 'class']
-#names = ['ICA1', 'ICA1bis', 'ICA2', 'ICA2bis', 'ICA3', 'ICA3bis','ICA4', 'ICA4bis', 'class']
-names = ['ICA1', 'ICA1bis', 'ICA2', 'ICA2bis', 'ICA3', 'ICA3bis', 'class']
+names = ['PCA1', 'PCA2', 'PCA3', 'PCA4', 'class']
 
-#dataset = pandas.read_csv('.\\csv\\csvMLData.csv', names=names)
 dataset = pandas.read_csv('.\\csv\\pcaData.csv', names=names)
 
 # Split-out validation dataset
 array = dataset.values
-X = array[:,0:6]
-Y = array[:,6]
+X = array[:,0:4]
+Y = array[:,4]
 validation_size = 0.05
 seed = 7
 X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y, test_size=validation_size, random_state=seed)
@@ -41,5 +38,5 @@ for name, model in models:
 	cv_results = model_selection.cross_val_score(model, X_train, Y_train, cv=kfold, scoring=scoring)
 	results.append(cv_results)
 	names.append(name)
-	msg = "{}: {:.2f} % ({:.2f})".format(name, cv_results.mean()*100, cv_results.std()*100)
+	msg = "{}: {:.2f} % (déviation : {:.2f}%)".format(name, cv_results.mean()*100, cv_results.std()*100)
 	print(msg)

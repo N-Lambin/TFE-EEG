@@ -10,7 +10,7 @@ f3 = 30
 fs = 128
 N = 200
 time = np.arange(N)/float(fs)
-nfft=fs
+nfft=128
 nperseg=fs
 
 def csvReader(filePath):
@@ -30,7 +30,7 @@ def csvReader(filePath):
 s2 = 2 * np.cos(2*np.pi*time*f2)
 s3 = 3 * np.cos(2*np.pi*time*f3) """
 
-s1, ps1 = csvReader("D:\\noela\\Documents\\3TI\\TFE\\github\\csv\\csvCleanData\\winkLeft\\winkLeft11Data\\AF3.csv")
+s1, ps1 = csvReader("D:\\noela\\Documents\\3TI\\TFE\\github\\csv\\csvCleanData\\winkLeft\\winkLeft10Data\\AF3.csv")
 s2, ps1 = csvReader("D:\\noela\\Documents\\3TI\\TFE\\github\\csv\\csvCleanData\\winkLeft\\winkLeft11Data\\F3.csv")
 s3, ps1 = csvReader("D:\\noela\\Documents\\3TI\\TFE\\github\\csv\\csvCleanData\\winkLeft\\winkLeft11Data\\F7.csv")
 
@@ -48,27 +48,28 @@ ac1fft = np.fft.rfft(ac1)
 ac1fft = np.square(ac1fft) """
 
 
-plt.subplot(411)
-plt.plot(s1, color='red')
-plt.plot(s2, color='green')
-plt.plot(s3, color='blue')
-plt.title('signaux sources')
+plt.subplot(211)
+plt.plot(s1, color='#263248')
+""" plt.plot(s2, color='green')
+plt.plot(s3, color='blue') """
+plt.title('Signal EEG source')
 
-plt.subplot(412)
-plt.plot(sx1, color='red')
+plt.subplot(212)
+plt.plot(sp1, color='#263248')
 #plt.plot(sx2, color='green')
 #plt.plot(sx3, color='blue')
+plt.title('Périodogramme')
 
-plt.subplot(413)
+""" plt.subplot(413)
 plt.plot(sp1, color='red')
 plt.plot(sp2, color='green')
 plt.plot(sp3, color='blue')
 
-""" plt.subplot(413)
+plt.subplot(413)
 plt.plot(ac1, color='red')
 
 plt.subplot(414)
 plt.plot(ac1fft, color='blue') """
 
-plt.subplots_adjust(0.09, 0.04, 0.94, 0.94, 0.26, 0.46)
+plt.subplots_adjust(0.09, 0.1, 0.94, 0.94, 0.26, 0.46)
 plt.show()
